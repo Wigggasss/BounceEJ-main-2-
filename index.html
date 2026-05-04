@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Bounce EJ</title>
-  <link rel="stylesheet" href="style.css?v=brawl-lobby-9">
+  <link rel="stylesheet" href="style.css?v=brawl-lobby-10">
 </head>
 <body>
   <main class="app-shell">
@@ -27,7 +27,7 @@
             <div id="menuPlayerName" class="card-tab">Player</div>
             <img id="menuCharacterImage" class="menu-character" src="Assets/Characters/Regular EJ.png" alt="Equipped character">
             <div class="player-copy">
-              <strong>Ready to bounce</strong>
+              <strong>im the best</strong>
               <span>Equip characters in the Locker.</span>
             </div>
           </aside>
@@ -47,8 +47,8 @@
               <span class="menu-emoji" aria-hidden="true">⚙️</span>
               <span>Settings</span>
             </button>
-            <button id="multiplayerButton" class="icon-menu-button multiplayer-button" type="button">
-              <span class="lock-icon" aria-hidden="false">🔒</span>
+            <button id="multiplayerButton" class="icon-menu-button multiplayer-button locked-menu-button" type="button" disabled aria-disabled="true">
+              <span class="lock-icon" aria-hidden="true">🔒</span>
               <span>Multiplayer</span>
             </button>
           </div>
@@ -212,6 +212,7 @@
           <p><strong>Gamepad</strong><span>Left stick or D-pad</span></p>
           <p><strong>P</strong><span>Pause / resume</span></p>
           <p><strong>Credit</strong><span>Elijah Jimenez</span></p>
+          <p><strong>Version</strong><span>1.3.13</span></p>
         </div>
         <div class="settings-card" aria-label="Settings">
           <h3>Settings</h3>
@@ -274,6 +275,9 @@
         </div>
         <div id="countdownOverlay" class="countdown-overlay hidden" aria-live="polite">
           <div id="countdownText" class="countdown-text">3</div>
+        </div>
+        <div id="adminJumpscareOverlay" class="admin-jumpscare hidden" aria-hidden="true">
+          <div id="adminJumpscareText">HAHA YOU CANT SEE HAHA HAHA HAHAHAHAHA</div>
         </div>
         <div id="pauseOverlay" class="overlay hidden">
           <div class="overlay-card pause-card">

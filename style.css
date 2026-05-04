@@ -1500,6 +1500,28 @@ p {
   display: none;
 }
 
+.admin-jumpscare {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.92);
+  color: #ff4a3d;
+  display: flex;
+  font-size: clamp(72px, 20vw, 220px);
+  inset: 0;
+  justify-content: center;
+  line-height: 0.9;
+  pointer-events: none;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  -webkit-text-stroke: clamp(3px, 0.7vw, 9px) #ffffff;
+  text-shadow: 0 10px 0 #10182f, 0 0 28px rgba(255, 74, 61, 0.8);
+  z-index: 9;
+}
+
+.admin-jumpscare.hidden {
+  display: none;
+}
+
 .countdown-text {
   color: #ffffff;
   font-size: clamp(84px, 18vw, 220px);
@@ -3809,12 +3831,53 @@ textarea {
 
 @media (max-width: 900px) {
   .menu-panel {
+    justify-content: center;
     overflow-x: hidden;
+    width: 100%;
+  }
+
+  .menu-content {
+    gap: 18px;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    max-width: min(470px, calc(100vw - 32px));
+    width: min(470px, calc(100vw - 32px));
+  }
+
+  .player-card,
+  .menu-actions,
+  .stat-board {
+    width: 100%;
+  }
+
+  .player-card {
+    order: 1;
+    transform: none;
+  }
+
+  .menu-actions {
+    gap: 16px;
+    grid-template-columns: minmax(0, 1fr);
+    order: 2;
+  }
+
+  .menu-actions .primary-button,
+  .menu-actions #gameModesButton {
+    grid-column: auto;
+  }
+
+  .stat-board {
+    grid-column: auto;
+    order: 3;
+  }
+
+  .stat-board .stats-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .menu-logo-frame {
     height: auto;
-    margin-bottom: 4px;
+    margin-bottom: 18px;
     margin-top: 0;
     max-width: min(460px, 86vw);
     width: min(460px, 86vw);
@@ -3826,12 +3889,37 @@ textarea {
 }
 
 @media (max-width: 520px) {
+  .menu-panel {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
   .menu-logo-frame {
     height: auto;
-    margin-bottom: 4px;
+    margin-bottom: 16px;
     margin-top: 0;
     max-width: min(330px, 86vw);
     width: min(330px, 86vw);
+  }
+
+  .menu-content {
+    gap: 16px;
+    max-width: calc(100vw - 16px);
+    width: calc(100vw - 16px);
+  }
+
+  .menu-actions {
+    gap: 14px;
+  }
+
+  .menu-actions button {
+    grid-template-columns: 38px minmax(0, 1fr);
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .menu-actions .primary-button {
+    grid-template-columns: 54px minmax(0, 1fr);
   }
 
   .menu-logo-frame .menu-logo {

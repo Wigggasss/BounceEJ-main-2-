@@ -178,5 +178,17 @@ window.BOUNCE_EJ_CHARACTERS = [
     "face": "#000000",
     "ring": "#fbccff",
     "rarity": "Legendary"
+  },
+  {
+    "id": "nate",
+    "name": "Nate",
+    "file": "Nate.png",
+    "price": 20,
+    "section": "Friends",
+    "limitedTime": false,
+    "fill": "#a50073",
+    "face": "#000000",
+    "ring": "#ffffff",
+    "rarity": "Rare"
   }
 ];
