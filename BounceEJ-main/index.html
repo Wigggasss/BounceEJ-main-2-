@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bounce EJ</title>
+  <link rel="stylesheet" href="style.css?v=brawl-lobby-9">
+</head>
+<body>
+  <main class="app-shell">
+    <div class="mobile-toast" role="status">We're currently working on mobile controls, for now the game works best on PC.</div>
+    <section id="menuScreen" class="screen active menu-screen" aria-label="Main menu">
+      <div class="menu-panel">
+        <div class="social-menu-buttons" aria-label="Social links">
+          <a class="social-menu-button" href="https://discord.gg/gtYwU2eMXq" target="_blank" rel="noopener noreferrer" aria-label="Join the Bounce EJ Discord server">
+            <img src="Assets/Icons/Discord-Symbol-White.png" alt="" aria-hidden="true">
+          </a>
+          <a class="social-menu-button instagram-menu-button" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Open Bounce EJ on Instagram">
+            <img src="Assets/Icons/Instagram_Glyph_White.png" alt="" aria-hidden="true">
+          </a>
+        </div>
+        <div class="menu-logo-frame">
+          <img class="menu-logo" src="Assets/Icons/BOUNCE EJ Logo Cropped.png" alt="Bounce EJ">
+        </div>
+        <div class="menu-content">
+          <aside class="cartoon-card player-card">
+            <div id="menuPlayerName" class="card-tab">Player</div>
+            <img id="menuCharacterImage" class="menu-character" src="Assets/Characters/Regular EJ.png" alt="Equipped character">
+            <div class="player-copy">
+              <strong>Ready to bounce</strong>
+              <span>Equip characters in the Locker.</span>
+            </div>
+          </aside>
+
+          <div class="menu-actions">
+            <button id="playButton" class="primary-button jumbo-button" type="button"><span class="menu-emoji" aria-hidden="true">▶️</span><span>Play</span></button>
+            <button id="gameModesButton" class="jumbo-button warning-button" type="button"><span class="menu-emoji" aria-hidden="true">🎮</span><span>Game Modes</span></button>
+            <button id="storeButton" class="icon-menu-button" type="button">
+              <span class="menu-emoji" aria-hidden="true">🛒</span>
+              <span>Item Shop</span>
+            </button>
+            <button id="characterButton" class="icon-menu-button" type="button">
+              <span class="menu-emoji" aria-hidden="true">👤</span>
+              <span>Locker</span>
+            </button>
+            <button id="controlsButton" class="icon-menu-button" type="button">
+              <span class="menu-emoji" aria-hidden="true">⚙️</span>
+              <span>Settings</span>
+            </button>
+            <button id="multiplayerButton" class="icon-menu-button multiplayer-button" type="button">
+              <span class="lock-icon" aria-hidden="false">🔒</span>
+              <span>Multiplayer</span>
+            </button>
+          </div>
+
+          <aside class="cartoon-card stat-board">
+            <div class="card-tab">Stats</div>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <span>XP</span>
+                <strong id="menuXp">0</strong>
+              </div>
+              <div class="stat-card">
+                <span>Best</span>
+                <strong id="menuBest">0</strong>
+              </div>
+              <div class="stat-card">
+                <span>Trial Best</span>
+                <strong id="menuTrialBest">0</strong>
+              </div>
+            </div>
+            <button id="leaderboardButton" class="leaderboard-open-button" type="button">Leaderboard</button>
+            <div class="account-mini-card" aria-live="polite">
+              <span id="authStatus">Playing as guest</span>
+              <button id="authOpenButton" type="button">Sign In</button>
+            </div>
+          </aside>
+        </div>
+        <div id="leaderboardToast" class="menu-toast-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="leaderboardTitle">
+          <div class="leaderboard-card leaderboard-toast-card">
+            <div class="leaderboard-heading">
+              <strong id="leaderboardTitle">Leaderboard</strong>
+              <div class="leaderboard-toast-actions">
+                <button id="leaderboardRefreshButton" type="button">Refresh</button>
+                <button id="leaderboardCloseButton" type="button">Close</button>
+              </div>
+            </div>
+            <div id="leaderboardStatus" class="leaderboard-status">Loading scores...</div>
+            <ol id="leaderboardList" class="leaderboard-list"></ol>
+          </div>
+        </div>
+        <div id="authOverlay" class="menu-toast-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+          <div class="leaderboard-card auth-card">
+            <div class="leaderboard-heading">
+              <strong id="authTitle">Account</strong>
+              <button id="authCloseButton" type="button">Close</button>
+            </div>
+            <p id="authAccountSummary" class="auth-summary">Sign in to sync XP, skins, and leaderboard progress.</p>
+            <label for="authEmailInput">Email</label>
+            <input id="authEmailInput" class="auth-input" type="email" autocomplete="email" placeholder="you@example.com">
+            <label for="authPasswordInput">Password</label>
+            <input id="authPasswordInput" class="auth-input" type="password" autocomplete="current-password" placeholder="Password">
+            <label for="authNameInput">Display name</label>
+            <input id="authNameInput" class="auth-input" type="text" maxlength="18" autocomplete="nickname" placeholder="Leaderboard name">
+            <div class="auth-actions">
+              <button id="authSignInButton" class="primary-button" type="button">Sign In</button>
+              <button id="authSignUpButton" type="button">Create</button>
+              <button id="authSignOutButton" class="danger-button hidden" type="button">Sign Out</button>
+            </div>
+            <p id="authMessage" class="auth-message" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="multiplayerScreen" class="screen" aria-label="Multiplayer">
+      <div class="panel multiplayer-panel">
+        <div class="screen-heading">
+          <button id="multiplayerBackButton" class="back-button">Back</button>
+          <h2>Multiplayer</h2>
+          <div class="small-stat">Online</div>
+        </div>
+
+        <div id="multiplayerSetup" class="multiplayer-setup">
+          <div class="multiplayer-card">
+            <strong>Online Duel</strong>
+            <span>Room-code 1v1. First player to fall loses.</span>
+            <button id="createRoomButton" class="primary-button" type="button">Create Room</button>
+          </div>
+
+          <div class="multiplayer-card">
+            <label for="joinRoomInput">Join Room</label>
+            <div class="join-room-row">
+              <input id="joinRoomInput" type="text" maxlength="6" autocomplete="off" spellcheck="false" placeholder="CODE">
+              <button id="joinRoomButton" type="button">Join</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="multiplayerLobby" class="multiplayer-lobby hidden">
+          <div class="room-code-card">
+            <span>Room Code</span>
+            <strong id="multiplayerRoomCode">----</strong>
+            <button id="copyRoomCodeButton" type="button">Copy</button>
+          </div>
+          <div id="multiplayerPlayerList" class="multiplayer-player-list"></div>
+          <div id="multiplayerLobbyCountdown" class="multiplayer-countdown">Waiting for two ready players.</div>
+          <div class="multiplayer-lobby-actions">
+            <button id="multiplayerReadyButton" class="primary-button" type="button">Ready</button>
+            <button id="multiplayerLeaveButton" type="button">Leave</button>
+          </div>
+        </div>
+
+        <p id="multiplayerStatus" class="multiplayer-status" aria-live="polite">Create a room or join a friend.</p>
+      </div>
+    </section>
+
+    <section id="modesScreen" class="screen" aria-label="Game modes">
+      <div class="panel modes-panel">
+        <div class="screen-heading">
+          <button id="modeBackButton" class="back-button">Back</button>
+          <h2>Game Modes</h2>
+          <div class="small-stat">Choose</div>
+        </div>
+        <div id="modeList" class="mode-list"></div>
+      </div>
+    </section>
+
+    <section id="storeScreen" class="screen" aria-label="Store">
+      <div class="panel">
+        <div class="screen-heading">
+          <button id="storeBackButton" class="back-button">Back</button>
+          <h2>Item Shop</h2>
+          <div class="small-stat">XP <strong id="storeXp">0</strong></div>
+        </div>
+        <div class="redeem-card">
+          <label for="redeemInput">Redeem code</label>
+          <div class="redeem-row">
+            <input id="redeemInput" type="text" autocomplete="off" spellcheck="false" placeholder="Enter code">
+            <button id="redeemButton">Redeem</button>
+          </div>
+          <p id="redeemMessage" class="redeem-message" aria-live="polite"></p>
+        </div>
+        <div id="storeTabs" class="store-tabs" role="tablist" aria-label="Store categories"></div>
+        <div id="storeList" class="item-list"></div>
+      </div>
+    </section>
+
+    <section id="characterScreen" class="screen" aria-label="Character selection">
+      <div class="panel">
+        <div class="screen-heading">
+          <button id="characterBackButton" class="back-button">Back</button>
+          <h2>Character</h2>
+          <div class="small-stat">Owned</div>
+        </div>
+        <div id="characterList" class="item-list"></div>
+      </div>
+    </section>
+
+    <section id="controlsScreen" class="screen" aria-label="Controls">
+      <div class="panel">
+        <div class="screen-heading">
+          <button id="controlsBackButton" class="back-button">Back</button>
+          <h2>Settings</h2>
+          <div class="heading-spacer" aria-hidden="true"></div>
+        </div>
+        <div class="controls-list">
+          <p><strong>A / D</strong><span>Move left / right</span></p>
+          <p><strong>Arrow keys</strong><span>Move left / right</span></p>
+          <p><strong>Touch left / right</strong><span>Hold a screen side</span></p>
+          <p><strong>Swipe left / right</strong><span>Move briefly</span></p>
+          <p><strong>Gamepad</strong><span>Left stick or D-pad</span></p>
+          <p><strong>P</strong><span>Pause / resume</span></p>
+          <p><strong>Credit</strong><span>Elijah Jimenez</span></p>
+        </div>
+        <div class="settings-card" aria-label="Settings">
+          <h3>Settings</h3>
+          <div class="setting-row">
+            <strong>Sensitivity</strong>
+            <div class="range-control">
+              <input id="sensitivitySlider" type="range" min="70" max="140" step="5" value="100" aria-label="Movement sensitivity">
+              <span id="sensitivityValue">100%</span>
+            </div>
+          </div>
+          <div class="setting-row leaderboard-name-setting">
+            <strong>Leaderboard</strong>
+            <div class="leaderboard-name-control">
+              <div class="leaderboard-name-row">
+                <input id="settingsLeaderboardNameInput" type="text" maxlength="18" autocomplete="nickname" placeholder="Your name">
+                <button id="settingsLeaderboardNameButton" type="button">Update</button>
+              </div>
+              <span id="settingsLeaderboardNameMessage" class="setting-help">Used for auto-saving scores.</span>
+            </div>
+          </div>
+          <div class="setting-row background-setting">
+            <strong>Background</strong>
+            <div class="background-picker">
+              <div id="backgroundPreview" class="background-preview" aria-hidden="true"></div>
+              <div class="background-actions">
+                <label class="file-button" for="backgroundUploadInput">Upload</label>
+                <input id="backgroundUploadInput" class="visually-hidden" type="file" accept="image/*">
+                <button id="clearBackgroundButton" type="button">Clear</button>
+              </div>
+              <span id="backgroundStatus" class="setting-help">Theme background active.</span>
+            </div>
+          </div>
+          <label class="setting-toggle" for="particlesToggle">
+            <span>Particles</span>
+            <input id="particlesToggle" type="checkbox">
+          </label>
+          <label class="setting-toggle" for="gamepadBadgeToggle">
+            <span>Gamepad Badge</span>
+            <input id="gamepadBadgeToggle" type="checkbox">
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="screen game-screen" aria-label="Game">
+      <div id="gameFrame" class="game-frame">
+        <canvas id="gameCanvas" width="420" height="720" aria-label="Bounce EJ play area"></canvas>
+        <div class="game-hud">
+          <div id="hudMode">Classic</div>
+          <div>Score <strong id="hudScore">0</strong></div>
+          <div id="hudTimerWrap">Time <strong id="hudTimer">120</strong></div>
+          <div>XP <strong id="hudXp">0</strong></div>
+          <div id="hudPowerup" class="hidden">Powerup</div>
+          <div id="hudPowerupMessage" class="hidden">Snack boost</div>
+        </div>
+        <div id="gamepadStatus" class="gamepad-status">Gamepad ready</div>
+        <div class="mobile-touch-controls" aria-hidden="true">
+          <div class="touch-zone touch-zone-left">‹</div>
+          <div class="touch-zone touch-zone-right">›</div>
+        </div>
+        <div id="countdownOverlay" class="countdown-overlay hidden" aria-live="polite">
+          <div id="countdownText" class="countdown-text">3</div>
+        </div>
+        <div id="pauseOverlay" class="overlay hidden">
+          <div class="overlay-card pause-card">
+            <h2>Paused</h2>
+            <p class="overlay-note">Press P to keep bouncing.</p>
+            <button id="pauseResumeButton" class="primary-button" type="button">Resume</button>
+            <button id="pauseEndButton" type="button">End Game</button>
+          </div>
+        </div>
+        <div id="gameOverOverlay" class="overlay hidden">
+          <div class="overlay-card">
+            <h2 id="gameOverTitle">Game Over</h2>
+            <p id="gameOverMessage" class="overlay-note hidden"></p>
+            <div class="result-row"><span>Best Score</span><strong id="finalBest">0</strong></div>
+            <div class="result-row"><span>This Match Score</span><strong id="finalScore">0</strong></div>
+            <div class="result-row"><span>Total XP Collected</span><strong id="finalTotalXp">0</strong></div>
+            <div id="leaderboardSubmitCard" class="leaderboard-submit-card">
+              <label for="leaderboardNameInput">Leaderboard name</label>
+              <div class="leaderboard-submit-row">
+                <input id="leaderboardNameInput" type="text" maxlength="18" autocomplete="nickname" placeholder="Your name">
+                <button id="submitScoreButton" type="button">Save</button>
+              </div>
+              <p id="leaderboardSubmitMessage" aria-live="polite"></p>
+            </div>
+            <button id="restartButton" class="primary-button">Restart</button>
+            <button id="mainMenuButton">Main Menu</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <section id="bannedScreen" class="banned-screen hidden" aria-live="assertive">
+    <div class="banned-card">
+      <h1>You've been banned</h1>
+      <p>You're probably a chud who was using exploits or you're just really bad.</p>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="characters.js"></script>
+  <script src="powerups.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

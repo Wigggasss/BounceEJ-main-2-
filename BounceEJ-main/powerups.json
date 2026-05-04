@@ -1,0 +1,32 @@
+[
+  {
+    "id": "burger",
+    "name": "Burger",
+    "emoji": "🍔",
+    "rarity": 60,
+    "effect": "grow",
+    "sizeBonus": 7,
+    "duration": 0,
+    "message": "Burger boost: bigger EJ!"
+  },
+  {
+    "id": "fries",
+    "name": "Fries",
+    "emoji": "🍟",
+    "rarity": 80,
+    "effect": "doubleXp",
+    "xpMultiplier": 2,
+    "duration": 12,
+    "message": "Fries frenzy: double XP!"
+  },
+  {
+    "id": "shake",
+    "name": "Shake",
+    "emoji": "🥤",
+    "rarity": 30,
+    "effect": "boost",
+    "boostVelocity": -1220,
+    "duration": 0,
+    "message": "Shake launch!"
+  }
+]
