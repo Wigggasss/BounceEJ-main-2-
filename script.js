@@ -18,13 +18,13 @@ const ADMIN_LIVE_PLAYERS_TABLE = "admin_live_players";
 const ADMIN_EFFECT_COMMANDS_TABLE = "admin_effect_commands";
 const STORE_CODE_RPC = "redeem_store_code";
 const LEADERBOARD_LIMIT = 5;
-const MULTIPLAYER_LOCKED = true;
+const MULTIPLAYER_LOCKED = false;
 const MULTIPLAYER_CHANNEL_PREFIX = "bounceej-duel-";
 const MULTIPLAYER_MAX_PLAYERS = 2;
 const MULTIPLAYER_STATE_INTERVAL = 0.2;
 const MULTIPLAYER_PRESENCE_INTERVAL = 0.75;
-const MULTIPLAYER_DISCONNECT_LIMIT = 8;
-const MULTIPLAYER_PRESENCE_LEAVE_GRACE = 1.5;
+const MULTIPLAYER_DISCONNECT_LIMIT = 18;
+const MULTIPLAYER_PRESENCE_LEAVE_GRACE = 4.5;
 const MULTIPLAYER_SIMULTANEOUS_WINDOW = 500;
 const MULTIPLAYER_GHOST_STALE_MS = 6500;
 const MULTIPLAYER_ROOM_CODE_LENGTH = 5;
@@ -2222,6 +2222,9 @@ function renderMultiplayerScreen() {
 
   renderMultiplayerPlayers();
   updateMultiplayerLobbyText();
+  if (multiplayer.isHost) {
+    maybeStartMultiplayerMatch();
+  }
 }
 
 function renderMultiplayerPlayers() {
@@ -2274,7 +2277,11 @@ function updateMultiplayerLobbyText() {
 
   if (multiplayer.players.every((player) => player.ready)) {
     multiplayerLobbyCountdown.textContent = "Both players ready.";
-    showMultiplayerStatus("Starting as soon as the host syncs the seed.", "success");
+    if (multiplayer.isHost) {
+      showMultiplayerStatus("Host is syncing the seed and starting the match.", "success");
+    } else {
+      showMultiplayerStatus("Starting as soon as the host syncs the seed.", "success");
+    }
     return;
   }
 
@@ -2323,6 +2330,7 @@ function connectMultiplayerRoom(roomCode, role) {
   multiplayer.channel = channel;
 
   channel
+    .on("presence", { event: "join" }, syncMultiplayerPresence)
     .on("presence", { event: "sync" }, syncMultiplayerPresence)
     .on("presence", { event: "leave" }, handleMultiplayerPresenceLeave);
 
@@ -3867,7 +3875,9 @@ function gameLoop(currentTime) {
   }
 
   updateGame(deltaSeconds);
+  updateMultiplayerDuringGame();
   drawGame();
+  updateHud();
 
   animationFrameId = requestAnimationFrame(gameLoop);
 }
