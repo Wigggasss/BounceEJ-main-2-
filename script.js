@@ -403,6 +403,7 @@ const copyRoomCodeButton = document.getElementById("copyRoomCodeButton");
 const multiplayerReadyButton = document.getElementById("multiplayerReadyButton");
 const multiplayerLeaveButton = document.getElementById("multiplayerLeaveButton");
 const storeButton = document.getElementById("storeButton");
+const storeBoostsShortcutButton = document.getElementById("storeBoostsShortcutButton");
 const characterButton = document.getElementById("characterButton");
 const controlsButton = document.getElementById("controlsButton");
 const storeBackButton = document.getElementById("storeBackButton");
@@ -434,7 +435,6 @@ const authForm = document.getElementById("authForm");
 const authEmailInput = document.getElementById("authEmailInput");
 const authPasswordInput = document.getElementById("authPasswordInput");
 const authNameInput = document.getElementById("authNameInput");
-const authForm = document.getElementById("authForm");
 const authSignInButton = document.getElementById("authSignInButton");
 const authSignUpButton = document.getElementById("authSignUpButton");
 const authSignOutButton = document.getElementById("authSignOutButton");
@@ -5943,9 +5943,6 @@ multiplayerLeaveButton.addEventListener("click", () => {
   renderMultiplayerScreen();
 });
 storeButton.addEventListener("click", () => showStore());
-if (buyBoostsButton) {
-  buyBoostsButton.addEventListener("click", showBoostStore);
-}
 if (storeBoostsShortcutButton) {
   storeBoostsShortcutButton.addEventListener("click", () => {
     activeStoreSection = BOOST_STORE_SECTION;
